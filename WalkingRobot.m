@@ -15,17 +15,17 @@ LegStartY(1) = 0;
 
 
 %Link Lengths*****************
-LinkLength(1) = 15;
-LinkLength(2) = 50;
-LinkLength(3) = 41.5;
-LinkLength(4) = 55.8;
-LinkLength(5) = 40.1;
-LinkLength(6) = 39.3;
-LinkLength(7) = 39.4;
-LinkLength(8) = 36.7;
-LinkLength(9) = 61.9;
-LinkLength(10) = 65.7;
-LinkLength(11) = 49;
+LinkLength(1) = 15 * SF;
+LinkLength(2) = 50 * SF;
+LinkLength(3) = 41.5 * SF;
+LinkLength(4) = 55.8 * SF;
+LinkLength(5) = 40.1 * SF;
+LinkLength(6) = 39.3 * SF;
+LinkLength(7) = 39.4 * SF;
+LinkLength(8) = 36.7 * SF;
+LinkLength(9) = 61.9 * SF;
+LinkLength(10) = 65.7 * SF;
+LinkLength(11) = 49 * SF;
 
 
 %Constants********************

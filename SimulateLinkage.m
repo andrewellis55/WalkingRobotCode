@@ -1,7 +1,7 @@
 %Runs Initialization File
 WalkingRobot;
 
-%Set Up Fiure
+%Set Up Figure
 figure
 limits = [-250, 450, -250, 350];
 
@@ -10,13 +10,13 @@ limits = [-250, 450, -250, 350];
 rev = 2;
 
 %Number of iterations per loop. 360 = max
-quality = 30
+quality = 30;
 
 %Simulation Loop
 for r = 1:rev
     for i = 1:(quality)
         
-        %Set T (theta) from loop position
+        %Set T (theta) from loop iteration
         T = i * 360 / quality
      
         
@@ -26,10 +26,15 @@ for r = 1:rev
         Leg(1).Link(1).Pos(B).Cor(X).Rev(T) = Leg(1).Link(1).Pos(A).Cor(X).Rev(T) + LinkLength(1)*cosd(T);
         Leg(1).Link(1).Pos(B).Cor(Y).Rev(T) = Leg(1).Link(1).Pos(A).Cor(Y).Rev(T) + LinkLength(1)*sind(T);
         
+        
+        %1stLeg, Link 2
+        a=1;
+        
+        
         %Plotting
         clf;
         
-        %Define Links;
+        %Define Link Coordicates;
         Link1x = [Leg(1).Link(1).Pos(A).Cor(X).Rev(T), Leg(1).Link(1).Pos(B).Cor(X).Rev(T)];
         Link1y = [Leg(1).Link(1).Pos(A).Cor(Y).Rev(T), Leg(1).Link(1).Pos(B).Cor(Y).Rev(T)];
         
@@ -39,6 +44,7 @@ for r = 1:rev
         %Set Axis
         axis(limits);
         
+        %Delay
         pause(.01)
         
         
