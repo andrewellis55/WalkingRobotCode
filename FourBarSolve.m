@@ -1,11 +1,11 @@
-function [ r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By r4Ax, r4Ay, r4Bx, r4By] = FourBarSolve( FixAx, FixAy, FixBx, FixBy, r1, r2, r3, r4, T2, flip  )
+function [ r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = FourBarSolve( FixAx, FixAy, FixBx, FixBy, r1, r2, r3, r4, T2, flip  )
     %Solving r2
     %Solve Point A of Input Link (r2)
     r2Ax = FixAx;
     r2Ay = FixAy;
     %Solve for Point B of Input Link (r2)
-    r2Bx = FixAx + r2 * sind(T2);
-    r2By = FixAy + r2 * cosd(T2);
+    r2Bx = FixAx + r2 * cosd(T2);
+    r2By = FixAy + r2 * sind(T2);
     
     %Solving r3
     %Solving for Point A of Coupler (r3)
@@ -17,13 +17,9 @@ function [ r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By r4Ax, r4Ay, r4Bx, r4By
     %Solving for Beta (Interior Angle between r3 and r4)
     B = acosd((D^2 - r3^2 - r4^2) / (-2 * r3 * r4));
     %Solving for Gamma
-    G = asind(r1 * sind(T2) / D) + asind(r4 * sind(B) / D);
+    G = acosd((r1^2 - D^2 - r2^2) / (-2 * r2 * D)) + acosd((r4^2 - D^2 - r3^2) / (-2 * r3 * D));
     %Solving for Theta 3 (Angle between r2 and r3)
-    if flip == 1
-    T3 = -180 + T2 + G;
-    elseif flip == -1
-        T3 = 180+T2 - G;
-    end 
+    T3 = -180 +T2 + G;
     %Solving for Point B
     r3Bx = r3Ax + r3 * cosd(T3);
     r3By = r3Ay + r3 * sind(T3);

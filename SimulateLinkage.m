@@ -7,10 +7,10 @@ WalkingRobot;
 
 %Set Up Figure
 figure
-limits = [-250, 450, -250, 350];
+limits = [-100, 100, -100, 100];
 
 %Number of Revolutions
-rev = 10;
+rev = 5;
 
 %Number of iterations per loop. 360 = max
 quality = 90;
@@ -40,10 +40,10 @@ for r = 1:rev
              Leg(1).Link(3).Pos(A).Cor(Y).Rev(T),...
              Leg(1).Link(3).Pos(B).Cor(X).Rev(T),...
              Leg(1).Link(3).Pos(B).Cor(Y).Rev(T)] = ...
-             FourBarSolve( LegStartX(1),   LegStartY(1), ...
-                           groundBx,       groundBy, ...
+             FourBarSolve( groundBx,   groundBy, ...
+                           LegStartX(1),       LegStartY(1), ...
                            FixedPointDist, LinkLength(1), ...
-                           LinkLength(2),  LinkLength(3), T, -1);
+                           LinkLength(2),  LinkLength(3), T, 1);
         
         
 
