@@ -1,4 +1,4 @@
-function [ r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = FourBarSolve( FixAx, FixAy, FixBx, FixBy, r1, r2, r3, r4, T2, flip  )
+function [ r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = FourBarSolve( FixAx, FixAy, FixBx, FixBy, r1, r2, r3, r4, T2,  )
     %Solving r2
     %Solve Point A of Input Link (r2)
     r2Ax = FixAx;

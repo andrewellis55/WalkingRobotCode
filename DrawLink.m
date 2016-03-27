@@ -1,4 +1,4 @@
-function DrawLink( X1, X2, Y1, Y2)
+function DrawLink(X1, X2, Y1, Y2)
        
        %Define Link Coordicates;
         LinkX = [X1, X2];

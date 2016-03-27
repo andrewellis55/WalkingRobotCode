@@ -1,19 +1,15 @@
 %Runs Initialization File
 WalkingRobot;
 
-%Temp Variables
-%A - Angle
-%D - Distance
-
 %Set Up Figure
 figure
 limits = [-100, 100, -100, 100];
 
 %Number of Revolutions
-rev = 5;
+rev = 2;
 
 %Number of iterations per loop. 360 = max
-quality = 90;
+quality = 30;
 
 %Simulation Loop
 for r = 1:rev
@@ -43,7 +39,7 @@ for r = 1:rev
              FourBarSolve( groundBx,   groundBy, ...
                            LegStartX(1),       LegStartY(1), ...
                            FixedPointDist, LinkLength(1), ...
-                           LinkLength(2),  LinkLength(3), T, 1);
+                           LinkLength(2),  LinkLength(3), T);
         
         
 
