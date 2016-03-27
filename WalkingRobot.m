@@ -26,6 +26,7 @@ LinkLength(8) = 36.7 * SF;
 LinkLength(9) = 61.9 * SF;
 LinkLength(10) = 65.7 * SF;
 LinkLength(11) = 49 * SF;
+FixedPointDist = 38.79226727 * SF;
 
 
 %Constants********************

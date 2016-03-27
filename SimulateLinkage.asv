@@ -13,7 +13,7 @@ limits = [-250, 450, -250, 350];
 rev = 10;
 
 %Number of iterations per loop. 360 = max
-quality = 90;
+quality = 30;
 
 %Simulation Loop
 for r = 1:rev
@@ -43,7 +43,7 @@ for r = 1:rev
              FourBarSolve( LegStartX(1),   LegStartY(1), ...
                            groundBx,       groundBy, ...
                            FixedPointDist, LinkLength(1), ...
-                           LinkLength(2),  LinkLength(3), T, -1);
+                           LinkLength(2),  LinkLength(3), T, TRU);
         
         
 
@@ -64,7 +64,7 @@ for r = 1:rev
         axis(limits);
         
         %Delay
-        pause(.1)
+        pause(.3)
         
         
     end
