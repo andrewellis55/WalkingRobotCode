@@ -30,11 +30,11 @@ FixedPointDist = 38.79226727 * SF;
 
 
 %Constants********************
-X=1; Y=2;A=1;B=2; INPUT = 1; OUTPUT = -1;
+X=1; Y=2;A=1;B=2; Norm = 0; FlipY = 1; FlipX = 1;
 
 
 %Initialize Linkage Array*****
-Leg(4).Link(11).Pos(2).Cor(2).Rev(361)=0;
+Leg(4).Link(11).Pos(2).Cor(2).Rev(360)=0;
 
 
 
