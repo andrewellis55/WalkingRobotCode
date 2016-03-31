@@ -14,8 +14,8 @@ function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3B
     %Creates Rotation Matrix
     R = [cosd(RotationAngle), -sind(RotationAngle); ...
         sind(RotationAngle), cosd(RotationAngle)];
+     
     
-
     %Applies Linear Transformation
     A = A * R;
     

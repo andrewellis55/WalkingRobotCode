@@ -9,36 +9,33 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
     %Solve Point A of Input Link (r2)
     r2Ax = FrameAx;
     r2Ay = FrameAy;
-    %Solve for Point B of Input Link (r2)
+    %Solve for Point B of Input Link (r2)  
+     %Solve for Point B of Input Link (r2)
     r2Bx = FrameAx + r2 * cosd(T2);
     r2By = FrameAy + r2 * sind(T2);
-    
-    %Solving r3A
-    %Solving for Point A of Coupler (r3)
-    r3Ax = r2Bx;
-    r3Ay = r2By;
-    
-    %Solving r4
+
     %Point A
     r4Ax = FrameBx;
     r4Ay = FrameBy;
     %Solve  Diagonal from top of input to bottom out output
     D = sqrt(r2^2 + r1^2 - 2 * r2 * r1 * cosd(T2));
     %Solving for Beta (Interior Angle between r3 and r4)
-    B = acosd((D^2 - r3^2 - r4^2) ./ (-2 * r3 * r4));
+    B = acosd((D^2 - r3^2 - r4^2) / (-2 * r3 * r4));
     %Solving for Gamma (Interior Angle between r1 and r4)
     C1 = asind(r2 * sind(T2) / D);
-    C2 = acosd((r3^2 - D^2 - r4^2) ./ (-2 * r4 * D));
-    G =180 -(C1 + C2);
+    %C1 = acosd((r2^2 - D^2 - r1^2) / (-2 * r1 * D));
+    C2 = acosd((r3^2 - D^2 - r4^2) / (-2 * r4 * D));
+    GOffset = atand((FrameBy - FrameAy) / (FrameBx - FrameAx));
+    G = 180 + GOffset - (C1 + C2);%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%168.4
     %Solving for Point B
     r4Bx = r4Ax + r4 * cosd(G);
-    r4By = r4Ax + r4 * sind(G);
+    r4By = r4Ay + r4 * sind(G);
     
     
     %Solving r3B
     r3Bx = r4Bx;
     r3By = r4By;
-    
+      
     if (FlipY == 1)
         A = [FrameAx, r2Bx, r3Bx, r4Ax ;FrameAy, r2By, r3By, r4Ay];
         A = A';
@@ -90,8 +87,12 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
         r4By = r3By;
     end
  
-    
-    
+       if 1==1
+        Mat = [r3Ax, r3Ay ; r3Bx, r3By];
+            Mat = diff(Mat);
+            norm(Mat);
+        end
+
     
 end
 

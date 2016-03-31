@@ -1,4 +1,4 @@
-function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = FourBarSolve( FrameAx, FrameAy, FrameBx, FrameBy, InputAx, InputAy, InputBx, InputBy, r1, r2, r3, r4)
+function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = MultiDependancyFourBarSolve( FrameAx, FrameAy, FrameBx, FrameBy, InputAx, InputAy, InputBx, InputBy, r1, r2, r3, r4)
     
      %Solves for Theta 2 via Dot Product
      a = InputBx - InputAx;
@@ -75,6 +75,12 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
         r4Bx = r3Bx;
         r4By = r3By;
     
+        
+        if 1==2
+        Mat = [r4Ax, r4Ay ; r4Bx, r4By];
+            Mat = diff(Mat);
+            norm(Mat)
+        end
 end
     
     
