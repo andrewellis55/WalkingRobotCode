@@ -10,7 +10,7 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
     r2Ax = FrameAx;
     r2Ay = FrameAy;
     %Solve for Point B of Input Link (r2)  
-     %Solve for Point B of Input Link (r2)
+    %Solve for Point B of Input Link (r2)
     r2Bx = FrameAx + r2 * cosd(T2);
     r2By = FrameAy + r2 * sind(T2);
 
@@ -22,10 +22,11 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
     %Solving for Beta (Interior Angle between r3 and r4)
     B = acosd((D^2 - r3^2 - r4^2) / (-2 * r3 * r4));
     %Solving for Gamma (Interior Angle between r1 and r4)
-    C1 = asind(r2 * sind(T2) / D);
+    C1 = asind((r2 * sind(T2)) / D);
     %C1 = acosd((r2^2 - D^2 - r1^2) / (-2 * r1 * D));
     C2 = acosd((r3^2 - D^2 - r4^2) / (-2 * r4 * D));
     GOffset = atand((FrameBy - FrameAy) / (FrameBx - FrameAx));
+    %G = acosd((r3 + r4 - r1 - r2 + 2 * r1 * r2 * cosd(T2)) / (2 * r3 * r4)) + GOffset;
     G = 180 + GOffset - (C1 + C2);%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%168.4
     %Solving for Point B
     r4Bx = r4Ax + r4 * cosd(G);
@@ -91,8 +92,8 @@ function [r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By
         Mat = [r3Ax, r3Ay ; r3Bx, r3By];
             Mat = diff(Mat);
             norm(Mat);
-        end
+       end
 
-    
+        
 end
 

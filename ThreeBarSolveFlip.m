@@ -1,10 +1,10 @@
-function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By] = ThreeBarSolve( FrameAx, FrameAy,FrameBx, FrameBy, r1, r2, r3)
+function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By] = ThreeBarSolveFlip( FrameAx, FrameAy,FrameBx, FrameBy, r1, r2, r3)
     %Calculates Angel
     IntAngle = acosd((r2^2 - r3^2 - r1^2)/(-2 * r1 * r3));
 
 
     %Creates Triangle Matrix
-    A = [0, 0; r1, 0;r3 * cosd(IntAngle), r3 * sind(IntAngle)];
+    A = [0, 0; r1, 0;r3 * cosd(IntAngle), -1* r3 * sind(IntAngle)];
     
     %Finds Angel About Which to Rotate
     Rise = real(FrameBy - FrameAy);
