@@ -1,54 +1,67 @@
-function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = CrankRockerLoopSolve( FrameAx, FrameAy, FrameBx, FrameBy, r1, r2, r3, r4, T2, FlipX, FlipY)
+function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By, V1, V2, V3, V4] = CrankRockerLoopSolve( FrameAx, FrameAy, FrameBx, FrameBy, r1, r2, r3, r4, T2, FlipX, FlipY)
 
     if FlipX == 1
         T2 = T2 * -1;
     end
     
-
-    %Solving r1
-    r1Ax = 0;
-    r1Ay = 0;
+    %expd is not a matlab function, I made it to input imaginairy numbers
+    %in degrees
+    Vec1 = r1 * expd(180 * 1i);
+    Vec2 = r2 * expd(T2 * 1i);
+    
+    %Solve T3
+    a3 = 2 * r2 * r3 * cosd(T2) - 2 * r1 * r3;
+    b3 = 2 * r2 * r3 * sind(T2);
+    d3 = r4^2 - r1^2 - r2^2 - r3^2 + 2 * r1 * r2 * cosd(T2);
+    R3 = sqrt(a3^2 + b3^2);
+    alpha3 = atand(b3/a3);
+    T3 = acosd(d3/R3) + alpha3;
+    
+    %Solve T4
+    a4 = -2 * r2 * r4 * cosd(T2) + 2 * r1 * r4;
+    b4 = -2 * r2 * r4 * sind(T2);
+    d4 = r3^2 - r1^2 - r2^2 - r4^2 + 2 * r1 *r2 * cosd(T2);
+    R4 = sqrt(a4^2 + b4^2);
+    alpha4 = atand(b4 / a4);
+    T4 = acosd(d4 / R4) + alpha4;
+    
+    Vec3 = r3 * expd(T3 * 1i);
+    Vec4 = r4 * expd((T4 - 180) * 1i);
+    
+    r1Ax = real(Vec1);
+    r1Ay = imag(Vec1);
+    
+    r1Bx = 0;
+    r1By = 0;
+    
     r2Ax = 0;
     r2Ay = 0;
     
-    %Solving r2
-    %Solve for Point B of Input Link (r2) Relative to Origin
-    r2Bx = r2Ax + r2 * cosd(T2);
-    r2By = r2Ay + r2 * sind(T2);
+    r2Bx = real(Vec2);
+    r2By = imag(Vec2);
     
-    %Solving r3A
-    %Solving for Point A of Coupler (r3)
-    r3Ax = r2Bx;
-    r3Ay = r2By;
+    r3Ax = real(Vec2);
+    r3Ay = imag(Vec2);
     
-    %Solving r4
-    %Point A
-    r4Ax = r1Ax - r1;
-    r4Ay = r1Ay;
-
-    %Thetat 4 - G
-    D = CosLaw(r1, r2, 180 - T2);
-    C1 = SinLaw(r2, D, 180 - T2);
-    C2 = RevCosLaw(r4, D, r3);
-    G = C1+C2;
-
+    r3Bx = real(Vec2 + Vec3);
+    r3By = imag(Vec2 + Vec3);
     
-    %r4 Point B
-    r4Bx = r4Ax + r4 * cosd(G);
-    r4By = r4Ay + r4 * sind(G);
+    r4Ax = real(Vec2 + Vec3);
+    r4Ay = imag(Vec2 + Vec3);
     
-    %Solve for r3 Point B
-    r3Bx = r4Bx;
-    r3By = r4By;
+    r4Bx = real(Vec2 + Vec3 + Vec4);
+    r4By = imag(Vec2 + Vec3 + Vec4);
+    
     
     
     
     %Rotate
+    if 1==2
         Rise = FrameBy - FrameAy;
         Run = FrameBx - FrameAx;
         RotationAngle = atan2d(Rise, -1 * Run);
         
-        A = [r1Ax, r2Bx, r3Bx, r4Ax ;r1Ay, r2By, r3By, r4Ay]';
+        A = [r2Ax, r3Ax, r4Ax, r1Ax ;r2Ay, r3Ay, r4Ay, r1Ay]';
         if FlipX == 1
         A = A * [1, 0; 0, -1];
         end
@@ -62,23 +75,23 @@ function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By
         transX = FrameBx;
         transY = FrameBy;
         A = A + [transX, transX, transX, transX;transY,transY,transY,transY]';
-        r1Ax = A(1,1);
-        r1Ay = A(1,2);
-        r2Bx = A(2,1);
-        r2By = A(2,2);
-        r3Bx = A(3,1);
-        r3By = A(3,2);
-        r4Ax = A(4,1);
-        r4Ay = A(4,2);
+        r2Ax = A(1,1);
+        r2Ay = A(1,2);
+        r3Ax = A(2,1);
+        r3Ay = A(2,2);
+        r4Ax = A(3,1);
+        r4Ay = A(3,2);
+        r1Ax = A(4,1);
+        r1Ay = A(4,2);
 
-        r1Bx = r4Ax;
-        r1By = r4Ay;
-        r2Ax = r1Ax;
-        r2Ay = r1Ay;
-        r3Ax = r2Bx;
-        r3Ay = r2By;
-        r4Bx = r3Bx;
-        r4By = r3By;
+        r1Bx = r2Ax;
+        r1By = r2Ay;
+        r2Bx = r3Ax;
+        r2By = r3Ay;
+        r3Bx = r4Ax;
+        r3By = r4Ay;
+        r4Bx = r1Ax;
+        r4By = r1Ay;
     
         
         if 1==2
@@ -86,6 +99,7 @@ function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By
             Mat = diff(Mat);
             norm(Mat)
         end
+end
 end
 
 function [c] = CosLaw(a, b, Theta)

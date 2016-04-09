@@ -1,7 +1,7 @@
   %1st Leg
         %Solve for ground Link
-        groundBx = LegStartX(1) -38 * SF;
-        groundBy = LegStartY(1) -7.8 * SF;
+        groundBx = LegStartX(1) + FixBx;
+        groundBy = LegStartY(1) + FixBy;
 
         if 1==1
             %Solving First FourBar Linkage

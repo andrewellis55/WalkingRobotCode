@@ -1,4 +1,9 @@
-function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = CrankRockerSolve( FrameAx, FrameAy, FrameBx, FrameBy, r1, r2, r3, r4, T2, FlipX, FlipY)
+function [r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By, r4Ax, r4Ay, r4Bx, r4By] = CrankRockerSolve( FrameAx, FrameAy, FrameBx, FrameBy, r1, r2, r3, r4, T2, FlipX, FlipY, Offset)
+   
+    %Checks if an offset has been provided as an input argument
+    if exist('Offset', 'var') ~= 0
+        T2 = T2 + Offset;
+    end
 
     if FlipX == 1
         T2 = T2 * -1;

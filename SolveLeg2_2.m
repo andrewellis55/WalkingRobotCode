@@ -1,7 +1,7 @@
   %1st Leg
         %Solve for ground Link
-        groundBx = LegStartX(2) - 38 * SF;
-        groundBy = LegStartY(2) + 7.8 * SF;
+        groundBx = LegStartX(2) + FixBx;
+        groundBy = LegStartY(2) - FixBy;
 
         if 1==1
             %Solving First FourBar Linkage
@@ -20,7 +20,7 @@
                 RockerCrankSolve( groundBx,   groundBy, ...
                 LegStartX(2),       LegStartY(2), ...
                 FixedPointDist, LinkLength(1), ...
-                LinkLength(2),  LinkLength(3), T + 23.19919044, FlipX, Norm);
+                LinkLength(2),  LinkLength(3), T, FlipX, Norm, 23.19919044);
 
         end
 
@@ -38,7 +38,7 @@
                CrankRockerSolve( groundBx,   groundBy, ...
                 LegStartX(2),       LegStartY(2),...
                 FixedPointDist, LinkLength(1), ...
-                LinkLength(4),  LinkLength(5), T+ 23.19919044, Norm, Norm);
+                LinkLength(4),  LinkLength(5), T, Norm, Norm, 23.19919044);
         end
 
 
