@@ -1,4 +1,11 @@
-% stepRadius = 0;
+%Comment out code generated data that was brought into excel. The data was
+%curve fitted in excel to give an approximate trend of Step Circumference
+%being 0.149 * SF
+
+
+%Solves for Step Circumfernce Data to be brought into excel. The Step length is approx 0.5 * Step Circumfernce
+%
+% stepCircumference = 0;
 % for stepAngleItr = 1: quality
 %     stepAngle = (stepAngleItr * 360 / quality) + 180;
 %     if stepAngle == 0
@@ -15,13 +22,13 @@
 %     Link11_CoodinateMatrix = diff(Link11_CoodinateMatrix)
 %     DiffLength = abs(norm(Link11_CoodinateMatrix)) / 10000
 %     SSSSSSS = stepAngle;
-%     stepRadius = stepRadius + DiffLength;
+%     stepCircumference = stepCircumference + DiffLength;
 %    
 % %     StepData(r, 1) = SF;
-% %     StepData(r, 2) = stepRadius;
+% %     StepData(r, 2) = stepCircumference;
 %    
 % end
-% stepRadius
+% stepCircumference
 
-
+%0.149 is based on an excel simulation of the above code
 stepRadius = 0.149 * SF;

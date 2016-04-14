@@ -1,5 +1,11 @@
 function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By] = ThreeBarSolve( FrameAx, FrameAy,FrameBx, FrameBy, r1, r2, r3)
-    %Calculates Angel
+    
+    %This function solves static 3 bar linkages then uses matrix
+    %transformations to place them at the (likely moving) location of the
+    %frame as set by the calling function
+
+
+    %Calculates interior Angle
     IntAngle = acosd((r2^2 - r3^2 - r1^2)/(-2 * r1 * r3));
 
 
@@ -14,7 +20,7 @@ function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3B
     %Creates Rotation Matrix
     R = [cosd(RotationAngle), -sind(RotationAngle); ...
         sind(RotationAngle), cosd(RotationAngle)];
-     
+   
     
     %Applies Linear Transformation
     A = A * R;

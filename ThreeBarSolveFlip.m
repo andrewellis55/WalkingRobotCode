@@ -1,5 +1,9 @@
 function [ r1Ax, r1Ay, r1Bx, r1By, r2Ax, r2Ay, r2Bx, r2By, r3Ax, r3Ay, r3Bx, r3By] = ThreeBarSolveFlip( FrameAx, FrameAy,FrameBx, FrameBy, r1, r2, r3)
-    %Calculates Angel
+    
+    %Duplicate of ThreeBArSolve with the trianlge flipped
+
+
+    %Calculates Angle
     IntAngle = acosd((r2^2 - r3^2 - r1^2)/(-2 * r1 * r3));
 
 
